@@ -1,6 +1,3 @@
-update stocks.country set name = null where name = 'US';
-update stocks.industry set name = null where name = 'Technology';
-
 delete from stocks.country where true;
 
 update stocks.price_history set min_price = -1 where true;

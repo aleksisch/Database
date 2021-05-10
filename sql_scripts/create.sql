@@ -68,7 +68,7 @@ create table stocks.bond
 (
     ticker              text unique primary key NOT NULL ,
     issuer              text,
-    yield               int not null,
+    yield               double precision not null,
     check ( yield > 0),
     FOREIGN KEY (issuer) REFERENCES stocks.stock(ticker),
     FOREIGN KEY (ticker) references stocks.instruments(ticker)
