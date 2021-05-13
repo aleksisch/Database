@@ -29,6 +29,7 @@ begin
 end;
 $$ language plpgsql;
 
+-- Logging all update and inserts with current timestamp
 drop trigger if exists country_log on stocks.country;
 create trigger country_log
     after update or insert on stocks.country
@@ -42,12 +43,15 @@ begin
 end;
 $$ language plpgsql;
 
+-- Save row value on each delete
 drop trigger if exists add_bonds_history on stocks.bond;
 create trigger add_bonds_history
     after delete on stocks.bond
     for each row
     execute procedure save_bond();
 
+
+-- Tests triggers
 insert into stocks.bond (ticker, issuer, yield) VALUES ('NMBL', 'NMBL', 0.1);
 delete from stocks.bond where ticker = 'NMBL';
 select * from bonds_history;
